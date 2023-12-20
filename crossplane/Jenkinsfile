@@ -26,6 +26,7 @@ spec:
             }
             steps {
                 container('kubectl-container') {
+                    sh 'ls'
                     sh 'kubectl apply -f /home/jenkins/agent/workspace/homework/crossplane/'
                 }
             }
