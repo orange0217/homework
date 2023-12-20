@@ -17,7 +17,7 @@ spec:
   rules:
   - host: jenkins.qlu.com
     http:
-      paths:
+      paths: jenkins/
       - backend:
           service:
             name: jenkins
