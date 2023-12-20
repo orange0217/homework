@@ -19,7 +19,7 @@ variable "github_username" {
   default = "orange0217"
 }
 
-# change me!
+# change me!!
 variable "github_personal_token" {
   default = "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"
 }
