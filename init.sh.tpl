@@ -26,3 +26,5 @@ helm upgrade -i jenkins jenkins/jenkins -n jenkins --create-namespace -f /tmp/je
 
 kubectl apply -f crossplane-tf-provider.yaml
 kubectl apply -f crossplane-tf-provider-config.yaml
+
+kubectl apply -f application-set.yaml

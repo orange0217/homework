@@ -39,6 +39,11 @@ resource "null_resource" "connect_ubuntu" {
 
   }
 
+    provisioner "file" {
+    destination = "/tmp/application-set.yaml"
+    source =  "${path.module}/yaml/application-set.yaml"
+
+  }
 
 
   provisioner "file" {
