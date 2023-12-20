@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: haproxy-ingress
+  namespace: haproxy
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: haproxy.qlu.com 
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ingress-nginx-haproxy
+                port:
+                  number: 80
+                  

@@ -17,8 +17,8 @@ data:
       default_backend be_main
 
     backend be_main
-      server cluster2 10.0.0.1:80 check
-      server cluster3 :80 check
+      server cluster2 43.128.21.38:80 check
+      server cluster3 124.156.133.214:80 check
 kind: ConfigMap
 metadata:
   annotations:
