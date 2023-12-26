@@ -18,30 +18,30 @@ resource "null_resource" "connect_ubuntu" {
 
   provisioner "file" {
     destination = "/tmp/jenkins-service-account.yaml"
-    source      = "${path.module}/yaml/jenkins-service-account.yaml"
+    source      = "${path.module}/jenkins/jenkins-service-account.yaml"
   }
 
   provisioner "file" {
     destination = "/tmp/jenkins-values.yaml"
-    source =  "${path.module}/yaml/values.yaml.tpl"
+    source =  "${path.module}/jenkins/values.yaml.tpl"
 
   }
 
     provisioner "file" {
     destination = "/tmp/crossplane-tf-provider.yaml"
-    source =  "${path.module}/yaml/crossplane-tf-provider.yaml"
+    source =  "${path.module}/crossplane/crossplane-tf-provider.yaml"
 
   }
 
     provisioner "file" {
     destination = "/tmp/crossplane-tf-provider-config.yaml"
-    source =  "${path.module}/yaml/crossplane-tf-provider-config.yaml"
+    source =  "${path.module}/crossplane/crossplane-tf-provider-config.yaml"
 
   }
 
     provisioner "file" {
     destination = "/tmp/application-set.yaml"
-    source =  "${path.module}/yaml/application-set.yaml"
+    source =  "${path.module}/argocd/application-set.yaml"
 
   }
 
@@ -49,7 +49,7 @@ resource "null_resource" "connect_ubuntu" {
   provisioner "file" {
     destination = "/tmp/github-personal-token.yaml"
     content = templatefile(
-      "${path.module}/yaml/github-personal-token.yaml.tpl",
+      "${path.module}/jenkins/github-personal-token.yaml.tpl",
       {
         "github_username" : "${var.github_username}"
         "github_personal_token" : "${var.github_personal_token}"
@@ -61,7 +61,7 @@ resource "null_resource" "connect_ubuntu" {
   provisioner "file" {
     destination = "/tmp/github-pat-secret-text.yaml"
     content = templatefile(
-      "${path.module}/yaml/github-pat-secret-text.yaml.tpl",
+      "${path.module}/jenkins/github-pat-secret-text.yaml.tpl",
       {
         "github_personal_token" : "${var.github_personal_token}"
       }

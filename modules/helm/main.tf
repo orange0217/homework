@@ -1,3 +1,9 @@
+provider "helm" {
+  kubernetes {
+    config_path = local_sensitive_file.kubeconfig.filename
+  }
+}
+
 resource "helm_release" "argo_cd" {
   depends_on       = [module.k3s]
   name             = "argocd"
@@ -27,7 +33,7 @@ resource "helm_release" "ingress-nginx" {
 
 resource "helm_release" "haproxy" {
   depends_on       = [module.k3s]
-  name             = "ingress-nginx"
+  name             = "haproxy"
   repository       = "https://haproxytech.github.io/helm-charts"
   chart            = "haproxy"
   namespace        = "haproxy"
