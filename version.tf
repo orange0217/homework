@@ -5,5 +5,10 @@ terraform {
       source  = "tencentcloudstack/tencentcloud"
       version = "1.81.5"
     }
+
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2.11"
+    }
   }
 }
