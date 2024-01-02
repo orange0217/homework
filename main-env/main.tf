@@ -22,7 +22,7 @@ resource "local_sensitive_file" "kubeconfig" {
 }
 
 resource "null_resource" "connect_ubuntu" {
-  depends_on = [module.k3s]
+  depends_on = [module.k3s,module.helm]
   connection {
     host     = module.cvm.public_ip
     type     = "ssh"
@@ -94,6 +94,8 @@ resource "null_resource" "connect_ubuntu" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/init.sh",
+      "sudo apt install dos2unix",
+      "dos2unix /tmp/init.sh",
       "sh /tmp/init.sh",
     ]
   }
