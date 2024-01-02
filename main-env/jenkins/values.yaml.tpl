@@ -10,8 +10,7 @@ controller:
   ingress:
     enabled: true
     ingressClassName: nginx
-    hosts:
-      - jenkins.qlu.com
+    hostName: jenkins.qlu.com
   adminPassword: "password123"
   installPlugins:
     - kubernetes:4029.v5712230ccb_f8
