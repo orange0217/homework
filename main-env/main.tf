@@ -52,13 +52,13 @@ resource "null_resource" "connect_ubuntu" {
 
     provisioner "file" {
     destination = "/tmp/crossplane-tf-provider.yaml"
-    source =  "${path.module}/crossplane/crossplane-tf-provider.yaml"
+    source =  "${path.module}/crossplane1/crossplane-tf-provider.yaml"
 
   }
 
     provisioner "file" {
     destination = "/tmp/crossplane-tf-provider-config.yaml"
-    source =  "${path.module}/crossplane/crossplane-tf-provider-config.yaml"
+    source =  "${path.module}/crossplane1/crossplane-tf-provider-config.yaml"
 
   }
 
