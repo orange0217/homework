@@ -35,6 +35,7 @@ resource "helm_release" "crossplane" {
   chart            = "crossplane"
   namespace        = "crossplane-system"
   create_namespace = true
+  version    = "1.9.2"
 }
 
 resource "helm_release" "ingress-nginx" {

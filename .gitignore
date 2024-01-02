@@ -4,5 +4,5 @@ terraform.tfstate.backup
 .terraform.lock.hcl
 .vscode
 main-env/.terraform
-
+config.yaml
 
