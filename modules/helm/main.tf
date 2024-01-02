@@ -22,6 +22,11 @@ resource "helm_release" "argo_cd" {
     value = "true"
   }
 
+  set {
+    name  = "server.ingress.ingressClassName"
+    value = "nginx"
+  }
+
   set_list {
     name  = "server.ingress.hosts"
     value = ["argo.${var.domain}"]
