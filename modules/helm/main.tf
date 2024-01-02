@@ -16,6 +16,12 @@ resource "helm_release" "argo_cd" {
     name  = "configs.params.server.insecure"
     value = "true"
   }
+
+  set {
+    name  = "server.ingress.enabled"
+    value = "true"
+  }
+
   set_list {
     name  = "server.ingress.hosts"
     value = ["argo.${var.domain}"]
@@ -23,7 +29,7 @@ resource "helm_release" "argo_cd" {
 }
 
 resource "helm_release" "crossplane" {
-  
+
   name             = "crossplane"
   repository       = "https://charts.crossplane.io/stable"
   chart            = "crossplane"
