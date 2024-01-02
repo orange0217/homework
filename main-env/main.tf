@@ -11,10 +11,20 @@ module "k3s" {
   private_ip = module.cvm.private_ip
 }
 
+module "helm" {
+  source = "../modules/helm"
+  config_path = local_sensitive_file.kubeconfig.filename
+}
+
+resource "local_sensitive_file" "kubeconfig" {
+  content  = module.k3s.kube_config
+  filename = "${path.module}/config.yaml"
+}
+
 resource "null_resource" "connect_ubuntu" {
   depends_on = [module.k3s]
   connection {
-    host     = "${tencentcloud_instance.web[0].public_ip}"
+    host     = module.cvm.public_ip
     type     = "ssh"
     user     = "ubuntu"
     password = var.password

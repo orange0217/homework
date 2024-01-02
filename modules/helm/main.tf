@@ -1,20 +1,29 @@
-provider "helm" {
-  kubernetes {
-    config_path = local_sensitive_file.kubeconfig.filename
-  }
-}
+
 
 resource "helm_release" "argo_cd" {
-  depends_on       = [module.k3s]
   name             = "argocd"
   repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
   namespace        = "argocd"
   create_namespace = true
+
+  set {
+    name  = "configs.secret.argocdServerAdminPassword"
+    value = "$2a$10$.NeEDuo4qmMNzuwHBLMvDuIpvqT52TdzW.1Zg9/dDssaiSRN.xa3u"
+  }
+
+  set {
+    name  = "configs.params.server.insecure"
+    value = "true"
+  }
+  set_list {
+    name  = "server.ingress.hosts"
+    value = ["argo.${var.domain}"]
+  }
 }
 
 resource "helm_release" "crossplane" {
-  depends_on       = [module.k3s]
+  
   name             = "crossplane"
   repository       = "https://charts.crossplane.io/stable"
   chart            = "crossplane"
@@ -23,7 +32,7 @@ resource "helm_release" "crossplane" {
 }
 
 resource "helm_release" "ingress-nginx" {
-  depends_on       = [module.k3s]
+  
   name             = "ingress-nginx"
   repository       = "https://kubernetes.github.io/ingress-nginx"
   chart            = "ingress-nginx"
@@ -32,7 +41,7 @@ resource "helm_release" "ingress-nginx" {
 }
 
 resource "helm_release" "haproxy" {
-  depends_on       = [module.k3s]
+  
   name             = "haproxy"
   repository       = "https://haproxytech.github.io/helm-charts"
   chart            = "haproxy"

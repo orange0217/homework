@@ -14,11 +14,11 @@ module "k3s" {
 
   servers = {
     "k3s" = {
-      ip = tencentcloud_instance.ubuntu[0].private_ip
+      ip = var.private_ip
       connection = {
         timeout  = "60s"
         type     = "ssh"
-        host     = ${var.public_ip}
+        host     = var.public_ip
         password = var.password
         user     = var.user
       }

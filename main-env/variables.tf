@@ -23,3 +23,7 @@ variable "github_username" {
 variable "github_personal_token" {
   default = "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"
 }
+
+variable "domain" {
+  default = ""
+}
