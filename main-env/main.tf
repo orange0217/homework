@@ -11,15 +11,17 @@ module "k3s" {
   private_ip = module.cvm.private_ip
 }
 
+resource "local_sensitive_file" "kubeconfig" {
+  content  = module.k3s.kube_config
+  filename = "${path.module}/config.yaml"
+}
+
 module "helm" {
   source = "../modules/helm"
   config_path = local_sensitive_file.kubeconfig.filename
 }
 
-resource "local_sensitive_file" "kubeconfig" {
-  content  = module.k3s.kube_config
-  filename = "${path.module}/config.yaml"
-}
+
 
 resource "null_resource" "connect_ubuntu" {
   depends_on = [module.k3s,module.helm]
