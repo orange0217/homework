@@ -1,5 +1,6 @@
 #!/bin/bash  
 
+cd /tmp
 # helm
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
@@ -24,7 +25,7 @@ kubectl apply -f /tmp/github-pat-secret-text.yaml -n jenkins
 helm upgrade -i jenkins jenkins/jenkins -n jenkins --create-namespace -f /tmp/jenkins-values.yaml --version "4.6.1"
 ##########################################install jenkins########################################
 
-kubectl apply -f crossplane-tf-provider.yaml
-kubectl apply -f crossplane-tf-provider-config.yaml
+kubectl apply -f /tmp/crossplane-tf-provider.yaml
+kubectl apply -f /tmp/crossplane-tf-provider-config.yaml
 
-kubectl apply -f application-set.yaml
+kubectl apply -f /tmp/application-set.yaml
