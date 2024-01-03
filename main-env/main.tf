@@ -16,15 +16,8 @@ resource "local_sensitive_file" "kubeconfig" {
   filename = "${path.module}/config.yaml"
 }
 
-module "helm" {
-  source = "../modules/helm"
-  config_path = local_sensitive_file.kubeconfig.filename
-}
-
-
-
 resource "null_resource" "connect_ubuntu" {
-  depends_on = [module.k3s,module.helm]
+  depends_on = [module.k3s]
   connection {
     host     = module.cvm.public_ip
     type     = "ssh"
@@ -38,7 +31,45 @@ resource "null_resource" "connect_ubuntu" {
 
   provisioner "file" {
     destination = "/tmp/init.sh"
-    source =  "${path.module}/init.sh.tpl"
+    content = templatefile(
+      "${path.module}/init.sh.tpl",
+      {
+        "domain" : "${var.domain}"
+        "jenkins_password" : "${var.password}"
+        "argocd_password"  : var.password
+      }
+    )
+  }
+
+  provisioner "file" {
+    destination = "/tmp/dnspod-webhook-values.yaml"
+    content = templatefile(
+      "${path.module}/cert-manager-webhook-dnspod/dnspod-webhook-values.yaml.tpl",
+      {
+        "secret_id" : "${var.secret_id}"
+        "secret_key" : "${var.secret_key}"
+      }
+    )
+  }
+
+  provisioner "file" {
+    destination = "/tmp/argocd-cert.yaml"
+    source      = "${path.module}/cert-manager-webhook-dnspod/argocd-cert.yaml"
+  }
+
+    provisioner "file" {
+    destination = "/tmp/jenkins-cert.yaml"
+    source      = "${path.module}/cert-manager-webhook-dnspod/jenkins-cert.yaml"
+  }
+
+  provisioner "file" {
+    destination = "/tmp/argocd-ingress.yaml"
+    source      = "${path.module}/argocd/argocd-ingress.yaml"
+  }
+
+    provisioner "file" {
+    destination = "/tmp/jenkins-ingress.yaml"
+    source      = "${path.module}/jenkins/jenkins-ingress.yaml"
   }
 
   provisioner "file" {

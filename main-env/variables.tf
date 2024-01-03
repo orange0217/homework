@@ -6,7 +6,7 @@ variable "secret_key" {
   default = "Uq9PYa8TegYDn3VyMdp3DMRRL70pkW8n"
 }
 
-variable "regoin" {
+variable "region" {
   default = "ap-hongkong"
 }
 
@@ -25,5 +25,5 @@ variable "github_personal_token" {
 }
 
 variable "domain" {
-  default = ""
+  default = "starmooc.net"
 }

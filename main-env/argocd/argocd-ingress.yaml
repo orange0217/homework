@@ -3,12 +3,10 @@ kind: Ingress
 metadata:
   name: argocd-ingress
   namespace: argocd
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
   rules:
-  - host: argocd.qlu.com
+  - host: argocd.starmooc.net
     http:
       paths:
       - path: /
@@ -18,4 +16,8 @@ spec:
             name: argocd-server
             port:
               name: https
+  tls:
+    hosts:
+    - argocd.starmooc.net
+    secretName: argocd-crt-secret 
 

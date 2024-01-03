@@ -12,3 +12,5 @@ output "password" {
   description = "vm password"
   value       = var.password
 }
+
+

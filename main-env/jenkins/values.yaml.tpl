@@ -7,10 +7,10 @@ agent:
       cpu: "2000m"
       memory: "2048Mi"
 controller:
-  ingress:
-    enabled: true
-    ingressClassName: nginx
-    hostName: jenkins.qlu.com
+  #ingress:
+   # enabled: true
+   # ingressClassName: nginx
+   # hostName: jenkins.starmooc.net
   adminPassword: "password123"
   installPlugins:
     - kubernetes:4029.v5712230ccb_f8

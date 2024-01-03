@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: jenkins-com-crt
+  namespace: jenkins
+spec:
+  secretName: jenkins-crt-secret # 证书保存在这个 secret 中
+  issuerRef:
+    name: cert-manager-webhook-dnspod-cluster-issuer # 这里使用自动生成出来的 ClusterIssuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+  dnsNames: # 填入需要签发证书的域名列表，确保域名是使用 dnspod 管理的
+  - starmooc.net
+  - jenkins.starmooc.net

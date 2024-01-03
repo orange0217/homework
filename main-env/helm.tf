@@ -1,6 +1,7 @@
 
 
 resource "helm_release" "argo_cd" {
+  depends_on       = [module.k3s]
   name             = "argocd"
   repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
@@ -19,7 +20,7 @@ resource "helm_release" "argo_cd" {
 
   set {
     name  = "server.ingress.enabled"
-    value = "true"
+    value = "false"
   }
 
   set {
@@ -34,7 +35,7 @@ resource "helm_release" "argo_cd" {
 }
 
 resource "helm_release" "crossplane" {
-
+  depends_on       = [module.k3s]
   name             = "crossplane"
   repository       = "https://charts.crossplane.io/stable"
   chart            = "crossplane"
@@ -44,7 +45,7 @@ resource "helm_release" "crossplane" {
 }
 
 resource "helm_release" "ingress-nginx" {
-  
+  depends_on       = [module.k3s]
   name             = "ingress-nginx"
   repository       = "https://kubernetes.github.io/ingress-nginx"
   chart            = "ingress-nginx"
@@ -53,11 +54,21 @@ resource "helm_release" "ingress-nginx" {
 }
 
 resource "helm_release" "haproxy" {
-  
+  depends_on       = [module.k3s]
   name             = "haproxy"
   repository       = "https://haproxytech.github.io/helm-charts"
   chart            = "haproxy"
   namespace        = "haproxy"
   create_namespace = true
+}
+
+resource "helm_release" "cert-manager" {
+  depends_on       = [module.k3s]
+  name             = "cert-manager"
+  repository       = "https://charts.jetstack.io"
+  chart            = "cert-manager"
+  namespace        = "cert-manager"
+  create_namespace = true
+  version          = "1.13.3"
 }
 
