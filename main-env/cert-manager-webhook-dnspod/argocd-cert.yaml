@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: argocd-com-crt
+  name: argocd-crt
   namespace: argocd
 spec:
   secretName: argocd-crt-secret # 证书保存在这个 secret 中

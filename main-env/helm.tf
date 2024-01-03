@@ -1,6 +1,6 @@
 
 
-resource "helm_release" "argo_cd" {
+resource "helm_release" "argocd" {
   depends_on       = [module.k3s]
   name             = "argocd"
   repository       = "https://argoproj.github.io/argo-helm"
@@ -30,7 +30,7 @@ resource "helm_release" "argo_cd" {
 
   set_list {
     name  = "server.ingress.hosts"
-    value = ["argo.${var.domain}"]
+    value = ["argocd.${var.domain}"]
   }
 }
 
@@ -69,6 +69,10 @@ resource "helm_release" "cert-manager" {
   chart            = "cert-manager"
   namespace        = "cert-manager"
   create_namespace = true
-  version          = "1.13.3"
+
+  set {
+    name  = "installCRDs"
+    value = "true"
+  }
 }
 

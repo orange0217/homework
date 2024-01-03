@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: jenkins-com-crt
+  name: jenkins-crt
   namespace: jenkins
 spec:
   secretName: jenkins-crt-secret # 证书保存在这个 secret 中

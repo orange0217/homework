@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Deploy to Kubernetes') {
             when {
-                changeset "**/crossplane/*.*"
+                changeset "**/crossplane1/*.*"
             }
             agent {
                 kubernetes {
@@ -27,7 +27,7 @@ spec:
             steps {
                 container('kubectl-container') {
                     sh 'pwd'
-                    sh 'kubectl apply -f ./crossplane'
+                    sh 'kubectl apply -f ./crossplane1'
                 }
             }
         }

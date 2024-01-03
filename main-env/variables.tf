@@ -27,3 +27,11 @@ variable "github_personal_token" {
 variable "domain" {
   default = "starmooc.net"
 }
+
+variable "apiID" {
+  default = "465516"
+}
+
+variable "apiToken" {
+  default = "999b587ad7645896934da64fd1ad7991"
+}

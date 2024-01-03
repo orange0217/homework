@@ -53,7 +53,7 @@ spec:
       
       
       # Create a web server without public ip #
-      resource "tencentcloud_instance" "ubuntu" {
+      resource "tencentcloud_instance" "ubuntu3" {
         instance_name = "${var.instance_name}-${count.index}"
         availability_zone = var.availability_zone
         image_id          = data.tencentcloud_images.default.images.0.image_id

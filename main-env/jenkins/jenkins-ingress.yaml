@@ -10,15 +10,16 @@ spec:
   rules:
   - host: jenkins.starmooc.net
     http:
-      paths: jenkins/
+      paths: 
       - backend:
           service:
             name: jenkins
             port:
               number: 8080
         pathType: ImplementationSpecific
+        path: /
   tls:
-    hosts:
+  - hosts:
     - jenkins.starmooc.net
     secretName: jenkins-crt-secret 
 

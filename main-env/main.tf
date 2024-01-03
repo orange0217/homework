@@ -17,7 +17,7 @@ resource "local_sensitive_file" "kubeconfig" {
 }
 
 resource "null_resource" "connect_ubuntu" {
-  depends_on = [module.k3s]
+  depends_on = [module.k3s,helm_release.cert-manager,helm_release.argocd,helm_release.crossplane]
   connection {
     host     = module.cvm.public_ip
     type     = "ssh"
@@ -46,8 +46,8 @@ resource "null_resource" "connect_ubuntu" {
     content = templatefile(
       "${path.module}/cert-manager-webhook-dnspod/dnspod-webhook-values.yaml.tpl",
       {
-        "secret_id" : "${var.secret_id}"
-        "secret_key" : "${var.secret_key}"
+        "apiID" : "${var.apiID}"
+        "apiToken" : "${var.apiToken}"
       }
     )
   }

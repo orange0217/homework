@@ -3,6 +3,9 @@ kind: Ingress
 metadata:
   name: argocd-ingress
   namespace: argocd
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "cert-manager-webhook-dnspod-cluster-issuer"
 spec:
   ingressClassName: nginx
   rules:
@@ -15,9 +18,9 @@ spec:
           service:
             name: argocd-server
             port:
-              name: https
+              number: 443
   tls:
-    hosts:
+  - hosts:
     - argocd.starmooc.net
-    secretName: argocd-crt-secret 
+    secretName: argocd-crt-secret
 
