@@ -1,12 +1,11 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: "github-pull-secret"
+  name: github-personal-token
   labels:
-    "jenkins.io/credentials-type": "usernamePassword"
+    "jenkins.io/credentials-type": "secretText"
   annotations:
-    "jenkins.io/credentials-description" : "credentials from Kubernetes"
+    "jenkins.io/credentials-description" : "github personal token"
 type: Opaque
 stringData:
-  username: "${github_username}"
-  password: "${github_personal_token}"
+  text: "${github_personal_token}"
