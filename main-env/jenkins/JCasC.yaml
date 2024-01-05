@@ -1,7 +1,7 @@
 unclassified:
   githubpluginconfig:
     configs:
-      - name: "GitHub"
+      - name: "GitHub111"
         apiUrl: "https://api.github.com"
         credentialsId: "github-personal-token"
         manageHooks: true
@@ -11,10 +11,18 @@ jobs:
         branchSources {
           github {
             // The id option in the Git and GitHub branch source contexts is now mandatory (JENKINS-43693).
-            id('test') // IMPORTANT: use a constant and unique identifier
+            id('test111') // IMPORTANT: use a constant and unique identifier
             scanCredentialsId('github-personal-token')
             repoOwner('orange0217')
             repository('homework')
           }
+        }
+        orphanedItemStrategy {
+          discardOldItems {
+            numToKeep(1)
+          }
+        }
+        triggers {
+          periodic(5)
         }
       }
