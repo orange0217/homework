@@ -1,0 +1,7 @@
+unclassified:
+  githubpluginconfig:
+    configs:
+      - name: "InHouse GitHub EE"
+        apiUrl: "https://github.domain.local/api/v3"
+        credentialsId: "[GitHubEEUser]"
+        manageHooks: true

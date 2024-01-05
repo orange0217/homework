@@ -14,3 +14,12 @@ argocd cluster add default --cluster-endpoint=config2.yaml --kubeconfig=config2.
 示例应用部署完成后，实现以下架构： assets/img.png
 备注
 这是一个理想的多云灾备部署场景, 集群 1、2、3 可能分别部署在不同云厂商。集群 1 的 Proxy 作为流量入口对外提供服务，对部署在集群 2 和集群 3 的无状态示例应用 Bookinfo 做负载均衡。
+
+
+
+argocd 配置域名后不能访问
+在参数里添加 --insecure
+或者在 ingress 里自动生成证书，注意要添加 annotations
+
+cert-manager 部署不成功
+需要手动部署crd资源

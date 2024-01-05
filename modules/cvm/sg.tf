@@ -49,69 +49,8 @@ resource "tencentcloud_security_group_rule" "ssh" {
   policy            = "accept"
 }
 
-# After install gitlab, nginx-controller will listen on 22
-resource "tencentcloud_security_group_rule" "ssh_login" {
-  security_group_id = tencentcloud_security_group.web_sg.id
-  type              = "ingress"
-  cidr_ip           = "0.0.0.0/0"
-  ip_protocol       = "tcp"
-  port_range        = "2222"
-  policy            = "accept"
-}
 
-resource "tencentcloud_security_group_rule" "thanos_grpc" {
-  security_group_id = tencentcloud_security_group.web_sg.id
-  type              = "ingress"
-  cidr_ip           = "0.0.0.0/0"
-  ip_protocol       = "tcp"
-  port_range        = "30901"
-  policy            = "accept"
-}
 
-resource "tencentcloud_security_group_rule" "thanos_http" {
-  security_group_id = tencentcloud_security_group.web_sg.id
-  type              = "ingress"
-  cidr_ip           = "0.0.0.0/0"
-  ip_protocol       = "tcp"
-  port_range        = "30902"
-  policy            = "accept"
-}
-
-resource "tencentcloud_security_group_rule" "grafana" {
-  security_group_id = tencentcloud_security_group.web_sg.id
-  type              = "ingress"
-  cidr_ip           = "0.0.0.0/0"
-  ip_protocol       = "tcp"
-  port_range        = "30080"
-  policy            = "accept"
-}
-
-resource "tencentcloud_security_group_rule" "thanos_web" {
-  security_group_id = tencentcloud_security_group.web_sg.id
-  type              = "ingress"
-  cidr_ip           = "0.0.0.0/0"
-  ip_protocol       = "tcp"
-  port_range        = "30090"
-  policy            = "accept"
-}
-
-resource "tencentcloud_security_group_rule" "thanos_bucket" {
-  security_group_id = tencentcloud_security_group.web_sg.id
-  type              = "ingress"
-  cidr_ip           = "0.0.0.0/0"
-  ip_protocol       = "tcp"
-  port_range        = "30092"
-  policy            = "accept"
-}
-
-resource "tencentcloud_security_group_rule" "thanos_compact" {
-  security_group_id = tencentcloud_security_group.web_sg.id
-  type              = "ingress"
-  cidr_ip           = "0.0.0.0/0"
-  ip_protocol       = "tcp"
-  port_range        = "30093"
-  policy            = "accept"
-}
 
 resource "tencentcloud_security_group_rule" "icmp" {
   security_group_id = tencentcloud_security_group.web_sg.id
