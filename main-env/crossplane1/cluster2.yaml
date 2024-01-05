@@ -188,7 +188,7 @@ spec:
             connection = {
               timeout  = "60s"
               type     = "ssh"
-              host     = tencentcloud_instance.ubuntu[0].public_ip
+              host     = tencentcloud_instance.ubuntu2[0].public_ip
               password = var.password
               user     = var.user
             }

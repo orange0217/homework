@@ -247,7 +247,7 @@ spec:
       
       # Default variables
       variable "availability_zone" {
-        default = "ap-hongkong-3"
+        default = "ap-hongkong-2"
       }
       
       variable "instance_charge_type" {
