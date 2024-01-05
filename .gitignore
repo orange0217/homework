@@ -5,4 +5,5 @@ terraform.tfstate.backup
 .vscode
 main-env/.terraform
 config.yaml
+main-env/variables.tf
 
