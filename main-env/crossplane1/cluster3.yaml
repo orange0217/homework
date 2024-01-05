@@ -1,7 +1,7 @@
 apiVersion: tf.upbound.io/v1beta1
 kind: Workspace
 metadata:
-  name: cluster3
+  name: cluster2
   namespace: crossplane-system
 spec:
   forProvider:
@@ -19,7 +19,6 @@ spec:
         route_table_id    = tencentcloud_route_table.tf_routetable.id
       
         tags = var.tags
-      
       }
       
       resource "tencentcloud_route_table" "tf_routetable" {
@@ -37,7 +36,12 @@ spec:
           name   = "instance-family"
           values = ["S5"]
         }
-      
+
+        filter {
+          name   = "zone"
+          values = ["${var.availability_zone}"]
+        }
+
         cpu_core_count = var.cpu
         memory_size    = var.memory
       }
@@ -67,12 +71,10 @@ spec:
         tags = var.tags
       }
       
-      resource "tencentcloud_security_group" "default" {
-        name = "tf-default-sg"
-      }
+  
       
       resource "tencentcloud_security_group" "web_sg" {
-        name        = "web-sg"
+        name        = "web-sg-3"
         description = "make it accessible for both production and stage ports"
       }
       
@@ -84,79 +86,6 @@ spec:
         policy            = "accept"
       }
       
-      resource "tencentcloud_security_group_rule" "http" {
-        security_group_id = tencentcloud_security_group.web_sg.id
-        type              = "ingress"
-        cidr_ip           = "0.0.0.0/0"
-        ip_protocol       = "tcp"
-        port_range        = "80"
-        policy            = "accept"
-      }
-      
-      resource "tencentcloud_security_group_rule" "https" {
-        security_group_id = tencentcloud_security_group.web_sg.id
-        type              = "ingress"
-        cidr_ip           = "0.0.0.0/0"
-        ip_protocol       = "tcp"
-        port_range        = "443"
-        policy            = "accept"
-      }
-      
-      resource "tencentcloud_security_group_rule" "k8s" {
-        security_group_id = tencentcloud_security_group.web_sg.id
-        type              = "ingress"
-        cidr_ip           = "0.0.0.0/0"
-        ip_protocol       = "tcp"
-        port_range        = "6443"
-        policy            = "accept"
-      }
-      
-      resource "tencentcloud_security_group_rule" "ssh" {
-        security_group_id = tencentcloud_security_group.web_sg.id
-        type              = "ingress"
-        cidr_ip           = "0.0.0.0/0"
-        ip_protocol       = "tcp"
-        port_range        = "22"
-        policy            = "accept"
-      }
-      
-      resource "tencentcloud_security_group_rule" "ssh_login" {
-        security_group_id = tencentcloud_security_group.web_sg.id
-        type              = "ingress"
-        cidr_ip           = "0.0.0.0/0"
-        ip_protocol       = "tcp"
-        port_range        = "2222"
-        policy            = "accept"
-      }
-      
-      resource "tencentcloud_security_group_rule" "icmp" {
-        security_group_id = tencentcloud_security_group.web_sg.id
-        type              = "ingress"
-        cidr_ip           = "0.0.0.0/0"
-        ip_protocol       = "icmp"
-        policy            = "accept"
-      }
-      
-      resource "tencentcloud_security_group_rule" "web_egrees_any" {
-        security_group_id = tencentcloud_security_group.web_sg.id
-        type              = "egress"
-        cidr_ip           = "0.0.0.0/0"
-        policy            = "accept"
-      }
-      
-      
-      # 放通所有端口，在生产环境下请谨慎使用
-      resource "tencentcloud_security_group_lite_rule" "all" {
-        security_group_id = tencentcloud_security_group.default.id
-      
-        ingress = [
-          "ACCEPT#0.0.0.0/0#ALL#TCP",
-        ]
-      
-        egress = [
-          "ACCEPT#0.0.0.0/0#ALL#TCP",
-        ]
-      }
       
       module "k3s" {
         source      = "xunleii/k3s/module"
@@ -179,7 +108,7 @@ spec:
         k3s_install_env_vars = {}
       
         servers = {
-          "k8s-hongkong-3" = {
+          "k8s-hongkong-2" = {
             ip = tencentcloud_instance.ubuntu[0].private_ip
             connection = {
               timeout  = "60s"
@@ -200,9 +129,6 @@ spec:
         value = tencentcloud_subnet.tf_service_subnet.id
       }
       
-      output "security_group_id" {
-        value = tencentcloud_security_group.default.id
-      }
       
       output "kube_config" {
         value = module.k3s.kube_config
@@ -281,7 +207,7 @@ spec:
       }
       
       variable "instance_name" {
-        default = "terraform-cvm-k8s"
+        default = "terraform-cvm-k8s-2"
       }
       
       variable "cpu" {
@@ -306,7 +232,7 @@ spec:
       - key: user
         value: ubuntu
       - key: availability_zone
-        value: ap-hongkong-1
+        value: ap-hongkong-2
       - key: instance_charge_type
         value: SPOTPAID
   providerConfigRef:
