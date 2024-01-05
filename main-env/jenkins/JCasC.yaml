@@ -3,5 +3,5 @@ unclassified:
     configs:
       - name: "InHouse GitHub EE"
         apiUrl: "https://github.domain.local/api/v3"
-        credentialsId: "[GitHubEEUser]"
+        credentialsId: "github-pat-secret-text"
         manageHooks: true
