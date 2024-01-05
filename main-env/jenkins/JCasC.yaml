@@ -17,12 +17,4 @@ jobs:
             repository('homework')
           }
         }
-        orphanedItemStrategy {
-          discardOldItems {
-            numToKeep(1)
-          }
-        }
-        triggers {
-          periodic(5)
-        }
       }
