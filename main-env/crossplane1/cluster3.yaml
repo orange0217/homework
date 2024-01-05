@@ -207,7 +207,7 @@ spec:
       }
       
       variable "instance_name" {
-        default = "terraform-cvm-k8s-2"
+        default = "terraform-cvm-k8s-3"
       }
       
       variable "cpu" {
