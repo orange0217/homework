@@ -5,3 +5,38 @@ unclassified:
         apiUrl: "https://api.github.com"
         credentialsId: "github-personal-token"
         manageHooks: true
+jobs:
+  - script: >
+      multibranchPipelineJob('build-go-example') {
+        branchSources {
+          //github {
+          //  id('build-go-example')
+          //  scanCredentialsId('github-pull-secret')
+          //  checkoutCredentialsId('github-pull-secret')
+          //  repoOwner('lyzhang1999')
+          //  repository('camp-go-example')
+            //buildOriginBranchWithPR(false)
+            //buildOriginPRMerge(true)
+            //buildForkPRMerge(true)
+          //}
+          git {
+            id("build-go-example")
+            remote("https://gitlab.gkdevopscamp.com/root/camp-go-example.git")
+            credentialsId("github-pull-secret")
+          }
+          gitlab {
+            serverName('gitlab-server')
+            projectOwner('root')
+            projectPath('root/camp-go-example')
+            credentialsId('gitlab-pull-secret')
+          }
+        }
+        triggers {
+          periodicFolderTrigger {
+            interval("1")
+          }
+        }
+        orphanedItemStrategy {
+          discardOldItems()
+        }
+      }
