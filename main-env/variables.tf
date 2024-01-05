@@ -21,7 +21,7 @@ variable "github_username" {
 
 # change me!!
 variable "github_personal_token" {
-  default = "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"
+  default = "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"
 }
 
 variable "domain" {
