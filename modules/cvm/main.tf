@@ -24,6 +24,10 @@ data "tencentcloud_availability_zones_by_product" "default" {
   product = "cvm"
 }
 
+data "tencentcloud_security_group" "default" {
+  name = "tf-security-group"
+}
+
 # resource "tencentcloud_key_pair" "key" {
 #   key_name   = "tf_key"
 #   public_key = file("ssh-key/id_rsa.pub")
@@ -46,7 +50,7 @@ resource "tencentcloud_instance" "ubuntu" {
   internet_max_bandwidth_out = 100
   allocate_public_ip         = true
   count                      = 1
-  orderly_security_groups    = [tencentcloud_security_group.web_sg.id]
+  orderly_security_groups    = [tencentcloud_security_group.web_sg.id,data.tencentcloud_security_group.default.id]
   password                   = var.password
 
   //data_disks {

@@ -32,18 +32,10 @@ spec:
       }
       
       data "tencentcloud_instance_types" "default" {
-        filter {
-          name   = "instance-family"
-          values = ["S5"]
-        }
+        availability_zone = var.availability_zone
       
-        filter {
-          name   = "zone"
-          values = ["${var.availability_zone}"]
-        }
-      
-        cpu_core_count = var.cpu
-        memory_size    = var.memory
+        cpu_core_count = 2
+        memory_size    = 4
       }
       
       data "tencentcloud_availability_zones_by_product" "default" {
@@ -52,7 +44,7 @@ spec:
       
       
       # Create a web server without public ip #
-      resource "tencentcloud_instance" "ubuntu2" {
+      resource "tencentcloud_instance" "ubuntu" {
         instance_name = "${var.instance_name}-${count.index}"
         availability_zone = var.availability_zone
         image_id          = data.tencentcloud_images.default.images.0.image_id
@@ -173,7 +165,7 @@ spec:
       
         generate_ca_certificates = true
         global_flags = [
-          "--tls-san ${tencentcloud_instance.ubuntu2[0].public_ip}",
+          "--tls-san ${tencentcloud_instance.ubuntu[0].public_ip}",
           "--write-kubeconfig-mode 644",
           "--disable=traefik",
           "--kube-controller-manager-arg bind-address=0.0.0.0",
@@ -184,11 +176,11 @@ spec:
       
         servers = {
           "k8s-hongkong-2" = {
-            ip = tencentcloud_instance.ubuntu2[0].private_ip
+            ip = tencentcloud_instance.ubuntu[0].private_ip
             connection = {
               timeout  = "60s"
               type     = "ssh"
-              host     = tencentcloud_instance.ubuntu2[0].public_ip
+              host     = tencentcloud_instance.ubuntu[0].public_ip
               password = var.password
               user     = var.user
             }
@@ -223,12 +215,12 @@ spec:
       
       output "public_ip" {
         description = "The public ip of instance."
-        value       = tencentcloud_instance.ubuntu2[0].public_ip
+        value       = tencentcloud_instance.ubuntu[0].public_ip
       }
       
       output "private_ip" {
         description = "The private ip of instance."
-        value       = tencentcloud_instance.ubuntu2[0].private_ip
+        value       = tencentcloud_instance.ubuntu[0].private_ip
       }
       
       output "ssh_password" {

@@ -25,3 +25,5 @@ cert-manager 部署不成功
 需要手动部署crd资源
 
 source <(kubectl completion bash)
+
+k get workspace k3s-2 -o yaml | yq .status.atProvider.outputs.public_ip

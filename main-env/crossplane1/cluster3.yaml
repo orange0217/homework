@@ -38,11 +38,6 @@ spec:
           values = ["S5"]
         }
       
-        filter {
-          name   = "zone"
-          values = ["${var.availability_zone}"]
-        }
-      
         cpu_core_count = var.cpu
         memory_size    = var.memory
       }
@@ -53,7 +48,7 @@ spec:
       
       
       # Create a web server without public ip #
-      resource "tencentcloud_instance" "ubuntu3" {
+      resource "tencentcloud_instance" "ubuntu" {
         instance_name = "${var.instance_name}-${count.index}"
         availability_zone = var.availability_zone
         image_id          = data.tencentcloud_images.default.images.0.image_id
@@ -174,7 +169,7 @@ spec:
       
         generate_ca_certificates = true
         global_flags = [
-          "--tls-san ${tencentcloud_instance.ubuntu3[0].public_ip}",
+          "--tls-san ${tencentcloud_instance.ubuntu[0].public_ip}",
           "--write-kubeconfig-mode 644",
           "--disable=traefik",
           "--kube-controller-manager-arg bind-address=0.0.0.0",
@@ -185,11 +180,11 @@ spec:
       
         servers = {
           "k8s-hongkong-3" = {
-            ip = tencentcloud_instance.ubuntu3[0].private_ip
+            ip = tencentcloud_instance.ubuntu[0].private_ip
             connection = {
               timeout  = "60s"
               type     = "ssh"
-              host     = tencentcloud_instance.ubuntu3[0].public_ip
+              host     = tencentcloud_instance.ubuntu[0].public_ip
               password = var.password
               user     = var.user
             }
@@ -224,12 +219,12 @@ spec:
       
       output "public_ip" {
         description = "The public ip of instance."
-        value       = tencentcloud_instance.ubuntu3[0].public_ip
+        value       = tencentcloud_instance.ubuntu[0].public_ip
       }
       
       output "private_ip" {
         description = "The private ip of instance."
-        value       = tencentcloud_instance.ubuntu3[0].private_ip
+        value       = tencentcloud_instance.ubuntu[0].private_ip
       }
       
       output "ssh_password" {
