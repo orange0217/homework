@@ -25,7 +25,7 @@ kubectl apply -f /tmp/jenkins-service-account.yaml -n jenkins
 kubectl apply -f /tmp/github-personal-token.yaml -n jenkins
 
 # jenkins github server(system) pat secret
-kubectl apply -f /tmp/github-pat-secret-text.yaml -n jenkins
+kubectl apply -f /tmp/github-user-pass.yaml -n jenkins
 
 # install jenkins helm
 helm upgrade -i jenkins jenkins/jenkins -n jenkins --create-namespace -f /tmp/jenkins-values.yaml --version "4.6.1"

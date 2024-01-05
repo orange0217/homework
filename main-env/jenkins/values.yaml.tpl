@@ -28,3 +28,40 @@ controller:
     - pipeline-stage-view:2.33
     - sonar:2.15
     - pipeline-utility-steps:2.16.0
+
+  JCasC:
+    defaultConfig: true
+    configScripts:
+      welcome-message: |
+       jenkins:
+         systemMessage: Welcome to xxxxxxxx!
+      jenkins-casc-configs: |
+        unclassified:
+          githubpluginconfig:
+            configs:
+              - name: "GitHub111"
+                apiUrl: "https://api.github.com"
+                credentialsId: "github-personal-token"
+                manageHooks: true
+      example-job: |
+        jobs:
+          - script: >
+              multibranchPipelineJob('small-case') {
+                branchSources {
+                  github {
+                    // The id option in the Git and GitHub branch source contexts is now mandatory (JENKINS-43693).
+                    id('multitest') // IMPORTANT: use a constant and unique identifier
+                    scanCredentialsId('github-user-pass')
+                    repoOwner('orange0217')
+                    repository('homework')
+                  }
+                }
+                triggers {
+                  periodicFolderTrigger {
+                    interval("1")
+                    }
+                }
+                orphanedItemStrategy {
+                  discardOldItems()
+                }
+              }

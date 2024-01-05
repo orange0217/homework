@@ -107,7 +107,6 @@ resource "null_resource" "connect_ubuntu" {
     content = templatefile(
       "${path.module}/jenkins/github-personal-token.yaml.tpl",
       {
-        "github_username" : "${var.github_username}"
         "github_personal_token" : "${var.github_personal_token}"
       }
     )
@@ -115,10 +114,11 @@ resource "null_resource" "connect_ubuntu" {
 
 
   provisioner "file" {
-    destination = "/tmp/github-pat-secret-text.yaml"
+    destination = "/tmp/github-user-pass.yaml"
     content = templatefile(
-      "${path.module}/jenkins/github-pat-secret-text.yaml.tpl",
+      "${path.module}/jenkins/github-user-pass.yaml.tpl",
       {
+        "github_username" : "${var.github_username}"
         "github_personal_token" : "${var.github_personal_token}"
       }
     )
