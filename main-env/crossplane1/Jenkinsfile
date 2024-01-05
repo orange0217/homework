@@ -1,5 +1,5 @@
 pipeline {
-    agent none // 不在主节点上运行
+    agent none // 不在主节点上运行1
     stages {
         stage('Deploy to Kubernetes') {
             when {
