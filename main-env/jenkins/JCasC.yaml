@@ -7,36 +7,22 @@ unclassified:
         manageHooks: true
 jobs:
   - script: >
-      multibranchPipelineJob('build-go-example') {
+      multibranchPipelineJob('image-jenkins') {
         branchSources {
-          //github {
-          //  id('build-go-example')
-          //  scanCredentialsId('github-pull-secret')
-          //  checkoutCredentialsId('github-pull-secret')
-          //  repoOwner('lyzhang1999')
-          //  repository('camp-go-example')
-            //buildOriginBranchWithPR(false)
-            //buildOriginPRMerge(true)
-            //buildForkPRMerge(true)
-          //}
-          git {
-            id("build-go-example")
-            remote("https://gitlab.gkdevopscamp.com/root/camp-go-example.git")
-            credentialsId("github-pull-secret")
-          }
-          gitlab {
-            serverName('gitlab-server')
-            projectOwner('root')
-            projectPath('root/camp-go-example')
-            credentialsId('gitlab-pull-secret')
-          }
-        }
-        triggers {
-          periodicFolderTrigger {
-            interval("1")
+          github {
+            // The id option in the Git and GitHub branch source contexts is now mandatory (JENKINS-43693).
+            id('test') // IMPORTANT: use a constant and unique identifier
+            scanCredentialsId('github-personal-token')
+            repoOwner('orange0217')
+            repository('homework')
           }
         }
         orphanedItemStrategy {
-          discardOldItems()
+          discardOldItems {
+            numToKeep(1)
+          }
+        }
+        triggers {
+          periodic(5)
         }
       }
