@@ -5,6 +5,9 @@ metadata:
     app.kubernetes.io/name: jenkins
   name: jenkins
   namespace: jenkins
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "cert-manager-webhook-dnspod-cluster-issuer"
 spec:
   ingressClassName: nginx
   rules:

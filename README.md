@@ -23,3 +23,5 @@ argocd 配置域名后不能访问
 
 cert-manager 部署不成功
 需要手动部署crd资源
+
+source <(kubectl completion bash)

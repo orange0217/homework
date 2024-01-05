@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Deploy to Kubernetes') {
             when {
-                changeset "**/crossplane1/*.*"
+                changeset "**/main-env/crossplane1/*.*"
             }
             agent {
                 kubernetes {

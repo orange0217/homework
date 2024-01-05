@@ -9,7 +9,7 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 git clone --depth 1 https://github.com/qqshfox/cert-manager-webhook-dnspod.git
 helm upgrade --install -n cert-manager -f /tmp/dnspod-webhook-values.yaml cert-manager-webhook-dnspod ./cert-manager-webhook-dnspod/deploy/cert-manager-webhook-dnspod
 #kubectl apply -f /tmp/argocd-cert.yaml
-kubectl apply -f /tmp/jenkins-cert.yaml
+#kubectl apply -f /tmp/jenkins-cert.yaml
 
 ##########################################install jenkins########################################
 # install jenkins

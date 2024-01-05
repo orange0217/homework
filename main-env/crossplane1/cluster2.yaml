@@ -173,7 +173,7 @@ spec:
       
         generate_ca_certificates = true
         global_flags = [
-          "--tls-san ${tencentcloud_instance.ubuntu[0].public_ip}",
+          "--tls-san ${tencentcloud_instance.ubuntu2[0].public_ip}",
           "--write-kubeconfig-mode 644",
           "--disable=traefik",
           "--kube-controller-manager-arg bind-address=0.0.0.0",
@@ -184,7 +184,7 @@ spec:
       
         servers = {
           "k8s-hongkong-2" = {
-            ip = tencentcloud_instance.ubuntu[0].private_ip
+            ip = tencentcloud_instance.ubuntu2[0].private_ip
             connection = {
               timeout  = "60s"
               type     = "ssh"
@@ -223,12 +223,12 @@ spec:
       
       output "public_ip" {
         description = "The public ip of instance."
-        value       = tencentcloud_instance.ubuntu[0].public_ip
+        value       = tencentcloud_instance.ubuntu2[0].public_ip
       }
       
       output "private_ip" {
         description = "The private ip of instance."
-        value       = tencentcloud_instance.ubuntu[0].private_ip
+        value       = tencentcloud_instance.ubuntu2[0].private_ip
       }
       
       output "ssh_password" {
@@ -310,7 +310,7 @@ spec:
       - key: user
         value: ubuntu
       - key: availability_zone
-        value: ap-hongkong-2
+        value: ap-hongkong-1
       - key: instance_charge_type
         value: SPOTPAID
   providerConfigRef:
