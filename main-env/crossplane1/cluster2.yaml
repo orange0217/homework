@@ -32,10 +32,18 @@ spec:
       }
       
       data "tencentcloud_instance_types" "default" {
-        availability_zone = var.availability_zone
-      
-        cpu_core_count = 2
-        memory_size    = 4
+        filter {
+          name   = "instance-family"
+          values = ["S5"]
+        }
+
+        filter {
+          name   = "zone"
+          values = ["${var.availability_zone}"]
+        }
+
+        cpu_core_count = var.cpu
+        memory_size    = var.memory
       }
       
       data "tencentcloud_availability_zones_by_product" "default" {
