@@ -1,9 +1,9 @@
 variable "secret_id" {
-  default = "AKID73lIfqriOxJUVItNjaCex65wa6OUQEsS"
+  default = ""
 }
 
 variable "secret_key" {
-  default = "Uq9PYa8TegYDn3VyMdp3DMRRL70pkW8n"
+  default = ""
 }
 
 variable "region" {
@@ -21,7 +21,7 @@ variable "github_username" {
 
 # change me!!
 variable "github_personal_token" {
-  default = "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"
+  default = ""
 }
 
 variable "domain" {
@@ -30,10 +30,10 @@ variable "domain" {
 
 variable "apiID" {
   description = "dnspod apiID"
-  default = "465516"
+  default = ""
 }
 
 variable "apiToken" {
   description = "dnspod apiToken"
-  default = "999b587ad7645896934da64fd1ad7991"
+  default = ""
 }
