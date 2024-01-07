@@ -86,7 +86,7 @@ spec:
         policy            = "accept"
       }
       
-      # 放通所有端口，在生产环境下请谨慎使用al
+      # 放通所有端口，在生产环境下请谨慎使用
       resource "tencentcloud_security_group_lite_rule" "all" {
         security_group_id = tencentcloud_security_group.web_sg.id
       
