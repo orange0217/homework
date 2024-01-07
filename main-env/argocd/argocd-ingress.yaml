@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: argocd.starmooc.net
+  - host: argo.starmooc.net
     http:
       paths:
       - path: /
@@ -24,5 +24,5 @@ spec:
   tls:
   - hosts:
     - argocd.starmooc.net
-    secretName: argocd-crt-secret
+    secretName: argo-crt-secret
 

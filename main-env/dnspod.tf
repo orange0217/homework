@@ -11,5 +11,5 @@ resource "tencentcloud_dnspod_record" "argocd" {
   record_type = "A"
   record_line = "默认"
   value       = module.cvm.public_ip
-  sub_domain  = "argocd"
+  sub_domain  = "argo"
 }

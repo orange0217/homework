@@ -108,7 +108,7 @@ spec:
         k3s_install_env_vars = {}
       
         servers = {
-          "k8s-hongkong-2" = {
+          "k8s-hongkong-3" = {
             ip = tencentcloud_instance.ubuntu[0].private_ip
             connection = {
               timeout  = "60s"
