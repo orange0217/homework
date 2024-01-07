@@ -39,7 +39,7 @@ controller:
         unclassified:
           githubpluginconfig:
             configs:
-              - name: "GitHub111"
+              - name: "GitHub"
                 apiUrl: "https://api.github.com"
                 credentialsId: "github-personal-token"
                 manageHooks: true

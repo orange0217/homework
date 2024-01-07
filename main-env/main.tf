@@ -57,10 +57,6 @@ resource "null_resource" "connect_ubuntu" {
     source      = "${path.module}/cert-manager-webhook-dnspod/argocd-cert.yaml"
   }
 
-    provisioner "file" {
-    destination = "/tmp/jenkins-cert.yaml"
-    source      = "${path.module}/cert-manager-webhook-dnspod/jenkins-cert.yaml"
-  }
 
   provisioner "file" {
     destination = "/tmp/argocd-ingress.yaml"
