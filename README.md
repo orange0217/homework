@@ -1,7 +1,7 @@
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 
 argocd admin initial-password -n argocd
-argocd cluster add default --cluster-endpoint=config2.yaml --kubeconfig=config2.yaml --name=k8s-2
+argocd cluster add default  --kubeconfig=config2.yaml --name=k8s-2 --label use=prod
 
 训练营课程大作业
 使用 Terraform 开通一台腾讯云 CVM, 安装 K3s(集群 1), 并在集群 1 内安装 Jenkins、Argo CD
@@ -27,3 +27,7 @@ cert-manager 部署不成功
 source <(kubectl completion bash)
 
 k get workspace k3s-2 -o yaml | yq .status.atProvider.outputs.public_ip
+
+curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+rm argocd-linux-amd64

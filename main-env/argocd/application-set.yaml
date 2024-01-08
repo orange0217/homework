@@ -17,7 +17,7 @@ spec:
       source:
         repoURL: https://github.com/orange0217/homework.git
         targetRevision: master
-        path: bookinfo
+        path: main-env/bookinfo
       destination:
         server: '{{server}}' # 'server' field of the secret
         namespace: default
