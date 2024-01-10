@@ -85,7 +85,19 @@ spec:
         policy            = "accept"
       }
       
+      # 放通所有端口，在生产环境下请谨慎使用!
+      resource "tencentcloud_security_group_lite_rule" "all" {
+        security_group_id = tencentcloud_security_group.web_sg.id
       
+        ingress = [
+          "ACCEPT#0.0.0.0/0#ALL#TCP",
+        ]
+      
+        egress = [
+          "ACCEPT#0.0.0.0/0#ALL#TCP",
+        ]
+      }
+
       module "k3s" {
         source      = "xunleii/k3s/module"
         k3s_version = "v1.28.1+k3s1"
