@@ -44,6 +44,8 @@ kubectl apply -f /tmp/crossplane-tf-provider-config.yaml
 
 kubectl apply -f /tmp/application-set.yaml
 kubectl apply -f /tmp/argocd-ingress.yaml
+##########################################install argocd########################################
+kubectl apply -f /tmp/haproxy-ingress.yaml
 
 echo "##################################### Access Infrastruct ########################################\n"
 echo "Access Jenkins: http://jenkins.${domain}, admin, ${jenkins_password}\n"

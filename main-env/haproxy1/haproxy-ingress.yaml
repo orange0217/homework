@@ -3,17 +3,23 @@ kind: Ingress
 metadata:
   name: haproxy-ingress
   namespace: haproxy
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "cert-manager-webhook-dnspod-cluster-issuer"
 spec:
   ingressClassName: nginx
   rules:
-    - host: haproxy.starmooc.net
+    - host: bookinfo.starmooc.net
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: ingress-nginx-haproxy
+                name: haproxy
                 port:
                   number: 80
-                  
+  tls:
+  - hosts:
+    - bookinfo.starmooc.net
+    secretName: bookinfo-crt-secret 

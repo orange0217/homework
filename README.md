@@ -2,19 +2,31 @@ steps:
 1 terraform init  &&  terraform apply -auto-approve
 2 cluster1 -- jenkins\argocd\haproxy\cert-manager\ingress\crossplane
 3 jenkins 自动运行流水线，部署 cluster2  cluster3
-4 argocd login https://argo.starmooc.net
+4 argocd login argo.starmooc.net
 5 argocd cluster add default  --kubeconfig=config2.yaml --name=k8s-2 --label use=prod
 6 更改 haproxy 的 configmap
+7 访问 bookinfo.starmooc.net
 
 
 
-
+argocd:
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
-
 argocd admin initial-password -n argocd
 argocd cluster add default  --kubeconfig=config2.yaml --name=k8s-2 --label use=prod
+rgocd 配置域名后不能访问
+在参数里添加 --insecure
+或者在 ingress 里自动生成证书，注意要添加 annotations
 
-训练营课程大作业
+curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+rm argocd-linux-amd64
+
+jenkins:
+使用 JCasC 配置多分支流水线任务
+使用 kubernetes-secret 插件自动配置 credentials
+
+
+
 使用 Terraform 开通一台腾讯云 CVM, 安装 K3s(集群 1), 并在集群 1 内安装 Jenkins、Argo CD
 书写 Terraform lac 代码: 开通两台腾讯云 CVM, 分别安装 K3s(集群 2、集群 3), 并实现以下要求:
 使用集群 1 作为 Terraform Kubernetes backend 后端存储
@@ -28,17 +40,12 @@ argocd cluster add default  --kubeconfig=config2.yaml --name=k8s-2 --label use=p
 
 
 
-argocd 配置域名后不能访问
-在参数里添加 --insecure
-或者在 ingress 里自动生成证书，注意要添加 annotations
+
 
 cert-manager 部署不成功
 需要手动部署crd资源
 
 source <(kubectl completion bash)
 
-k get workspace k3s-2 -o yaml | yq .status.atProvider.outputs.public_ip
+kubectl get workspace k3s-2 -o yaml | yq .status.atProvider.outputs.public_ip
 
-curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
-rm argocd-linux-amd64

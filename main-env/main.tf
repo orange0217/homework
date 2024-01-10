@@ -97,6 +97,12 @@ resource "null_resource" "connect_ubuntu" {
 
   }
 
+    provisioner "file" {
+    destination = "/tmp/haproxy-ingress.yaml"
+    source =  "${path.module}/haproxy1/haproxy-ingress.yaml"
+
+  }
+
 
   provisioner "file" {
     destination = "/tmp/github-personal-token.yaml"
