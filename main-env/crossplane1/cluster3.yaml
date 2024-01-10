@@ -2,7 +2,6 @@ apiVersion: tf.upbound.io/v1beta1
 kind: Workspace
 metadata:
   name: cluster3
-  namespace: crossplane-system
 spec:
   forProvider:
     module: |

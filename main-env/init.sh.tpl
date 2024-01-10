@@ -1,6 +1,10 @@
 #!/bin/bash  
 
 cd /tmp
+#install argocd
+curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+rm argocd-linux-amd64
 # helm
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
@@ -35,6 +39,7 @@ kubectl apply -f /tmp/jenkins-ingress.yaml
 
 kubectl apply -f /tmp/crossplane-tf-provider.yaml
 kubectl apply -f /tmp/crossplane-tf-provider-config.yaml
+kubectl apply -f /tmp/crossplane-tf-provider-config.yaml 
 ##########################################install argocd########################################
 
 kubectl apply -f /tmp/application-set.yaml
@@ -43,3 +48,4 @@ kubectl apply -f /tmp/argocd-ingress.yaml
 echo "##################################### Access Infrastruct ########################################\n"
 echo "Access Jenkins: http://jenkins.${domain}, admin, ${jenkins_password}\n"
 echo "Access Argo CD: http://argocd.${domain}, admin, ${argocd_password}\n"
+
