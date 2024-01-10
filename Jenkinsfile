@@ -27,8 +27,8 @@ spec:
             steps {
                 container('kubectl-container') {
                     sh 'pwd'
-                    sh 'kubectl apply -f ./main-env/crossplane1/cluster2.yaml'
-                    sh 'kubectl apply -f ./main-env/crossplane1/cluster3.yaml'
+                    sh 'kubectl apply -f ./main-env/crossplane1'
+                    
                 }
             }
         }
