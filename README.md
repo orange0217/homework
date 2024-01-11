@@ -10,7 +10,7 @@ Todo
     示例应用部署完成后，实现以下架构： assets/img.png
     备注
     这是一个理想的多云灾备部署场景, 集群 1、2、3 可能分别部署在不同云厂商。集群 1 的 Proxy 作为流量入口对外提供服务，对部署在集群 2 和集群 3 的无状态示例应用 Bookinfo 做负载均衡。
-
+![Alt text](image.png)
 Steps
 
     1 terraform init  &&  terraform apply -auto-approve
