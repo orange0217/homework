@@ -14,7 +14,7 @@ Todo
 Steps
 
     1 terraform init  &&  terraform apply -auto-approve
-    2 cluster1 -- jenkins\argocd\haproxy\cert-manager\ingress\crossplane
+    2 cluster1 中会安装 jenkins\argocd\haproxy\cert-manager\ingress\crossplane
     3 jenkins 自动运行流水线，部署 cluster2  cluster3
     4 argocd login argo.starmooc.net
     5 argocd cluster add default  --kubeconfig=config2.yaml --name=k8s-2 --label use=prod
