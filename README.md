@@ -17,10 +17,17 @@ rgocd 配置域名后不能访问
 在参数里添加 --insecure
 或者在 ingress 里自动生成证书，注意要添加 annotations
 
+#安装 argocd cli
 curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
 sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 rm argocd-linux-amd64
 
+#安装 argo-rollouts
+kubectl create ns argo-rollouts
+kubectl apply -n argo-rollouts -f  https://ghproxy.com/https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+#安装 argo-rollouts dashboard
+wget https://github.com/argoproj/argo-rollouts/releases/download/v1.6.4/kubectl-argo-rollouts-linux-amd64
+sudo install -m 755 kubectl-argo-rollouts-linux-amd64 /usr/local/bin/kubectl-argo-rollouts
 jenkins:
 使用 JCasC 配置多分支流水线任务
 使用 kubernetes-secret 插件自动配置 credentials

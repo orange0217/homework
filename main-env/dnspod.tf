@@ -3,7 +3,7 @@ resource "tencentcloud_dnspod_record" "jenkins" {
   record_type = "A"
   record_line = "默认"
   value       = module.cvm.public_ip
-  sub_domain  = "jenkins"
+  sub_domain  = "jenkin"
 }
 
 resource "tencentcloud_dnspod_record" "argocd" {

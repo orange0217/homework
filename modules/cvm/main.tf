@@ -40,7 +40,8 @@ resource "tencentcloud_instance" "ubuntu" {
   availability_zone = var.availability_zone
   image_id          = data.tencentcloud_images.default.images.0.image_id
   //key_ids                    = [tencentcloud_key_pair.key.id]
-  instance_type              = data.tencentcloud_instance_types.default.instance_types.0.instance_type
+  //instance_type              = data.tencentcloud_instance_types.default.instance_types.0.instance_type
+  instance_type              = "S5.MEDIUM8"
   system_disk_type           = "CLOUD_SSD"
   system_disk_size           = 100
   hostname                   = "${var.instance_name}-${count.index}"

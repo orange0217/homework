@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   labels:
     app.kubernetes.io/name: jenkins
-  name: jenkins
+  name: jenkins-ingress
   namespace: jenkins
   annotations:
     kubernetes.io/tls-acme: "true"
@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: jenkins.starmooc.net
+  - host: jenkin.starmooc.net
     http:
       paths: 
       - backend:
@@ -23,7 +23,7 @@ spec:
         path: /
   tls:
   - hosts:
-    - jenkins.starmooc.net
+    - jenkin.starmooc.net
     secretName: jenkins-crt-secret 
 
 

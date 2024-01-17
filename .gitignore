@@ -6,4 +6,5 @@ terraform.tfstate.backup
 main-env/.terraform
 config.yaml
 main-env/variables.tf
+cvm-only/variables.tf
 
