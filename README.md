@@ -34,6 +34,7 @@ kubectl apply -n argo-rollouts -f  https://ghproxy.com/https://github.com/argopr
 #安装 argo-rollouts dashboard
 wget https://github.com/argoproj/argo-rollouts/releases/download/v1.6.4/kubectl-argo-rollouts-linux-amd64
 sudo install -m 755 kubectl-argo-rollouts-linux-amd64 /usr/local/bin/kubectl-argo-rollouts
+kubectl argo rollouts dashboard
 jenkins:
 使用 JCasC 配置多分支流水线任务
 使用 kubernetes-secret 插件自动配置 credentials
